@@ -2,23 +2,18 @@ package elevate.task1;
 
 import java.util.Scanner;
 
-/* -----------------------------------------------------------
-   POJO (Plain Old Java Object) that *knows how to calculate*.
-   Each object holds two numbers and can perform operations
-   on those numbers through instance methods.
-   ----------------------------------------------------------- */
 class calculatorClass {
 
     private double a;
     private double b;
 
-    // 📌 Constructor: sets the two numbers when we create the object
+    // Constructor: sets the two numbers when we create the object
     calculatorClass(double a, double b) {
         this.a = a;
         this.b = b;
     }
 
-    /* ---------- Basic Operations ---------- */
+    // Basic Operations 
     double add()       { return a + b; }
     double subtract()  { return a - b; }
     double multiply()  { return a * b; }
@@ -26,16 +21,13 @@ class calculatorClass {
     double divide() {
         if (b == 0) {
             // We let the caller decide how to deal with “not-a-number”
-            System.out.println("⚠️  Error: Division by zero!");
+            System.out.println("  Error: Division by zero!");
             return Double.NaN;
         }
         return a / b;
     }
 }
 
-/* -----------------------------------------------------------
-   “Driver” class that owns main() and handles all user I/O.
-   ----------------------------------------------------------- */
 public class Calculator {
 
     // 💡 A helper method that uses a *switch* to delegate work
@@ -65,7 +57,7 @@ public class Calculator {
 
         // Main program loop
         while (keepRunning) {
-            // 1️⃣  Show menu
+            //  Show menu
             System.out.println("\nChoose an operation:");
             System.out.println("1 ➜ Addition (+)");
             System.out.println("2 ➜ Subtraction (-)");
@@ -76,26 +68,26 @@ public class Calculator {
 
             int choice = sc.nextInt();  // read menu option
 
-            if (choice == 5) {          // user chose Exit
+            if (choice <= 5) {          // user chose Exit
                 keepRunning = false;
                 System.out.println("\n  Thanks for using the calculatorClass. Goodbye!");
                 break;
             }
 
-            // 2️⃣  Ask for the two numbers
+            //  Ask for the two numbers
             System.out.print("Enter first number: ");
             double num1 = sc.nextDouble();
 
             System.out.print("Enter second number: ");
             double num2 = sc.nextDouble();
 
-            // 3️⃣  Build a Calculator *object* with those numbers
+            //  Build a Calculator *object* with those numbers
             calculatorClass calc = new calculatorClass(num1, num2);
 
-            // 4️⃣  Let performOperation() and its switch pick the method
+            //  Let performOperation() and its switch pick the method
             double result = performOperation(choice, calc);
 
-            // 5️⃣  Only print if it’s a valid number (not NaN)
+            // Only print if it’s a valid number (not NaN)
             if (!Double.isNaN(result)) {
                 System.out.println("  Result = " + result);
             }
